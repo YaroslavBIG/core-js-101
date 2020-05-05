@@ -10,6 +10,7 @@ insert_final_newline = true
 
 [*.js]
 quote_type = single
+end_of_line = lf
 
 [*.md]
 trim_trailing_whitespace = false
