@@ -209,8 +209,12 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const firstSymb = isStartIncluded ? '[' : '(';
+  const lastSymb = isEndIncluded ? ']' : ')';
+  const center = a <= b ? `${a}, ${b}` : `${b}, ${a}`;
+
+  return `${firstSymb}${center}${lastSymb}`;
 }
 
 
@@ -226,8 +230,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -243,8 +247,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return Number(num.toString().split('').reverse().join(''));
 }
 
 
@@ -268,8 +272,10 @@ function reverseInteger(/* num */) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(value) {
+  return (value.toString().replace(/\D/g, '').split('').reverse()
+    .map((d, i) => +['0123456789', '0246813579'][i % 2][+d])
+    .reduce((p, n) => p + n) % 10) === 0;
 }
 
 /**
@@ -286,8 +292,10 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const result = num.toString().split('').reduce((prev, cur) => Number(prev) + Number(cur));
+  if (result.toString().length > 1) { return getDigitalRoot(result); }
+  return result;
 }
 
 
@@ -312,10 +320,24 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
-}
+function isBracketsBalanced(str) {
+  const strToArr = str.split('');
+  const arrLen = strToArr.length;
+  const conf = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']];
+  const confLen = conf.length;
+  for (let count = 0; count < arrLen; count += 1) {
+    for (let counter = 0; counter < confLen; counter += 1) {
+      if (strToArr[count] === conf[counter][0] && strToArr[count + 1] === conf[counter][1]) {
+        strToArr.splice(count, 2);
+        count = -1;
+      }
+    }
+  }
 
+  const result = !strToArr.length;
+
+  return result;
+}
 
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
@@ -337,8 +359,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
