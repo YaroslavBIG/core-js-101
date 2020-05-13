@@ -133,7 +133,22 @@ function isTriangle(a, b, c) {
  *
  */
 function doRectanglesOverlap(/* rect1, rect2 */) {
+  // Проверяем если верхняя грань первого прямоугольника находится ниже второго,
+  // или нижняя выше верхней  грани первого. Тоже самое и для оси X.
+  // const a = {
+  //   x: rect1.top,
+  //   y: rect1.left,
+  //   x1: rect1.width,
+  //   y1: rect1.height,
+  // };
+  // const b = {
+  //   x: rect2.top,
+  //   y: rect2.left,
+  //   x1: rect2.width,
+  //   y1: rect2.height,
+  // };
   throw new Error('Not implemented');
+  // return ((a.y < b.y1 || a.y1 > b.y) || (a.x1 > b.x || a.x < b.x1));
 }
 
 
