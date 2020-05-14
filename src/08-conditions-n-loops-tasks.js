@@ -197,11 +197,25 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  // const arr = str.split('');
-  // const uniq = Array.from([...new Set(arr)]);
-  // return uniq[0];
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const arr = str.split('');
+  const obj = {};
+  let count = 0;
+
+  arr.map((el) => {
+    if (obj[el]) {
+      count += 1;
+      obj[el.toString()] += 1;
+      obj[`${el.toString()}count`] = count;
+    } else {
+      obj[el.toString()] = 1;
+      count += 1;
+      obj[`${el.toString()}count`] = count;
+    }
+    return false;
+  });
+  const minEl = Object.entries(obj).sort((a, b) => a[1] - b[1])[0][0];
+  return obj[minEl] === 1 ? minEl : null;
 }
 
 
