@@ -499,7 +499,7 @@ function distinct(arr) {
  *
  * @example
  *   group([
- *      { country: 'Belarus', city: 'Brest' },
+ *      { country: 'Belarus',  city: 'Brest' },
  *      { country: 'Russia', city: 'Omsk' },
  *      { country: 'Russia', city: 'Samara' },
  *      { country: 'Belarus', city: 'Grodno' },
